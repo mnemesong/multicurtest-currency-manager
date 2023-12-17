@@ -28,14 +28,14 @@ class CurrencyConvMultiplierManagerStub implements
      */
     public function getMultipliersBetween(string $cur1, string $cur2): array
     {
-        return array_filter(
+        return array_values(array_filter(
             $this->multsLog,
             fn(CurrencyConvMultiplierRecStub $ccmrs)
                 => (($ccmrs->getFromCurId() === $cur1)
                     && ($ccmrs->getToCurId() === $cur2))
                 || (($ccmrs->getFromCurId() === $cur2)
                     && ($ccmrs->getToCurId() === $cur1))
-        );
+        ));
     }
 
     /**
@@ -52,8 +52,8 @@ class CurrencyConvMultiplierManagerStub implements
         return new CurrencyConvMultiplierRecStub(
             $curFrom,
             $curTo,
-            (new \DateTime("now"))->getTimestamp(),
-            $multi
+            $multi,
+            (new \DateTime("now"))->getTimestamp()
         );
     }
 

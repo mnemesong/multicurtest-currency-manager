@@ -14,18 +14,20 @@ class CurrencyConvMultiplierRecStub implements CurrencyConvMultiplierRecInterfac
     /**
      * @param string $fromCurId
      * @param string $toCurId
-     * @param int $timestamp
      * @param float $multiplier
+     * @param int|null $timestamp
      */
     public function __construct(
         string $fromCurId,
         string $toCurId,
-        int $timestamp,
-        float $multiplier
+        float $multiplier,
+        ?int $timestamp = null
     ) {
         $this->fromCurId = $fromCurId;
         $this->toCurId = $toCurId;
-        $this->timestamp = $timestamp;
+        $this->timestamp = is_null($timestamp)
+            ? (new \DateTime("now"))->getTimestamp()
+            : $timestamp;
         $this->multiplier = $multiplier;
     }
 

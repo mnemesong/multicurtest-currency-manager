@@ -50,7 +50,7 @@ final class CurrencyManager implements
     {
         $newName = strtoupper($newCurId);
         $matches = [];
-        preg_match("/^[A-Z]$/", $newName, $matches);
+        preg_match("/^[A-Z]+$/", $newName, $matches);
         Assert::notEmpty($matches);
         return $newName;
     }
@@ -84,11 +84,13 @@ final class CurrencyManager implements
             ? $last->getMultiplier()
             : (1 / $last->getMultiplier());
         $unitsInOldCurrency = floatval($amount->getDecades())
-            / (10 ^ $amount->getDotPosition());
+            / pow(10, $amount->getDotPosition());
         $unitsInNewCurrency = $unitsInOldCurrency * $multVal;
         $newCurDotPos = $this->getCurrencyDotPosition($targetCurrency);
+        $decadesInNewCurrency = intval($unitsInNewCurrency
+            * pow(10, $newCurDotPos));
         return new AmountInCurrencyVal(
-            intval($unitsInNewCurrency * (10 ^ $newCurDotPos)),
+            $decadesInNewCurrency,
             $newCurDotPos,
             $targetCurrency
         );
@@ -103,10 +105,23 @@ final class CurrencyManager implements
         string $fromCur,
         CurrencyConversionMultiplierVal $conversionMultipliersTo
     ): void {
+        $fromCur = $this->convertNameToNewCurrencyToValid($fromCur);
+        $toCur = $this->convertNameToNewCurrencyToValid(
+            $conversionMultipliersTo->getCurTo());
+        $multi = $conversionMultipliersTo->getMultiplier();
+        Assert::notEq($fromCur, $toCur, "Unavailable define convertion "
+            . "from currency to it self");
+        Assert::notEq($multi, 0, "Zero - is unavailable value"
+            . " for convertion multiplier");
+        $existsCurrencyIds = $this->getAllCurrenciesExists();
+        Assert::inArray($fromCur, $existsCurrencyIds, "Currency "
+            . $fromCur . " are not defined");
+        Assert::inArray($toCur, $existsCurrencyIds, "Currency "
+            . $toCur . " are not defined");
         $newMult = $this->currencyConvMultiplierManger->createNewMultiplier(
             $fromCur,
-            $conversionMultipliersTo->getCurTo(),
-            $conversionMultipliersTo->getMultiplier()
+            $toCur,
+            $multi
         );
         $this->currencyConvMultiplierManger
             ->saveNewMany([$newMult]);
@@ -129,6 +144,18 @@ final class CurrencyManager implements
             CurrencyConversionMultiplierVal::class);
         $curId = $this->convertNameToNewCurrencyToValid($curId);
         $existsCurrencyIds = $this->getAllCurrenciesExists();
+        Assert::false(in_array($curId, $existsCurrencyIds), "Currency "
+            . $curId . " already exists");
+        $argumentTargetCurrencies = array_map(
+            fn(CurrencyConversionMultiplierVal $m) => $m->getCurTo(),
+            $conversionMultipliersTo
+        );
+        Assert::uniqueValues($argumentTargetCurrencies, "Multipliers "
+            . "for some currencies are repeat");
+        foreach ($existsCurrencyIds as $eci) {
+            Assert::inArray($eci, $argumentTargetCurrencies, "Multiplier"
+                . " for currency " . $eci . " is required but not given");
+        }
         $cur = $this->currencyDefManager->create($curId, $decimalPosition);
         $this->currencyDefManager->save($cur);
         $multiRecs = array_map(
