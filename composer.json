@@ -1,0 +1,42 @@
+{
+    "name": "pantagruel74/multicurtest-currency-amount-service",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pantagruel74\\MulticurtestCurrencyAmountService\\": "src/",
+            "Pantagruel74\\MulticurtestCurrencyAmountServiceStubs\\": "stubs/",
+            "Pantagruel74\\MulticurtestCurrencyAmountServiceTest\\": "test-unit/"
+        }
+    },
+    "scripts": {
+        "test:unit": "phpunit ./test-unit"
+    },
+    "authors": [
+        {
+            "name": "Pantagruel74",
+            "email": "tostar74@mail.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4",
+        "webmozart/assert": "^1.11",
+        "pantagruel74/multicurtest-bank-management-service": "^1.0.0",
+        "pantagruel74/multicurtest-private-operations-service": "^1.2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "ramsey/uuid": "^4.2"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mnemesong/multicurtest-bank-management-service.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/mnemesong/multicurtest-private-operations-service.git"
+        }
+    ]
+}
