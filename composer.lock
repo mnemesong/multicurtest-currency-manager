@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e9fca49e8e035c9857d7a014094c94b",
+    "content-hash": "9902e03462dc84b60108e95f00a9e78f",
     "packages": [
         {
             "name": "pantagruel74/multicurtest-bank-management-service",

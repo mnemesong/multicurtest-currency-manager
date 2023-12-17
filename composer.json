@@ -1,12 +1,12 @@
 {
-    "name": "pantagruel74/multicurtest-currency-amount-service",
+    "name": "pantagruel74/multicurtest-currency-manager",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Pantagruel74\\MulticurtestCurrencyAmountService\\": "src/",
-            "Pantagruel74\\MulticurtestCurrencyAmountServiceStubs\\": "stubs/",
-            "Pantagruel74\\MulticurtestCurrencyAmountServiceTest\\": "test-unit/"
+            "Pantagruel74\\MulticurtestCurrencyManager\\": "src/",
+            "Pantagruel74\\MulticurtestCurrencyManagerStubs\\": "stubs/",
+            "Pantagruel74\\MulticurtestCurrencyManagerTest\\": "test-unit/"
         }
     },
     "scripts": {
