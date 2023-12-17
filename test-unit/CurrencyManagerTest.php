@@ -297,4 +297,36 @@ class CurrencyManagerTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $zeroBob = $currencyManager->getZeroForCurrency("BOB");
     }
+
+    public function testIsCurrenciesAvailableIdsValid()
+    {
+        $curDefManager = new CurrencyDefManagerStub([
+            new CurrencyDefRecStub("RUB", 0, true),
+            new CurrencyDefRecStub("EUR", 0, true),
+            new CurrencyDefRecStub("USD", 0, true),
+        ]);
+        $curConvMultiManager = new CurrencyConvMultiplierManagerStub([
+        ]);
+        $currencyManager = new CurrencyManager(
+            $curDefManager,
+            $curConvMultiManager
+        );
+        $this->assertTrue($currencyManager->isCurrenciesAvailable(["RUB", "eur"]));
+    }
+
+    public function testIsCurrenciesAvailableIdsInvalid()
+    {
+        $curDefManager = new CurrencyDefManagerStub([
+            new CurrencyDefRecStub("RUB", 0, true),
+            new CurrencyDefRecStub("EUR", 0, false),
+            new CurrencyDefRecStub("USD", 0, true),
+        ]);
+        $curConvMultiManager = new CurrencyConvMultiplierManagerStub([
+        ]);
+        $currencyManager = new CurrencyManager(
+            $curDefManager,
+            $curConvMultiManager
+        );
+        $this->assertFalse($currencyManager->isCurrenciesAvailable(["RUB", "eur"]));
+    }
 }

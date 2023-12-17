@@ -23,7 +23,8 @@
         "php": ">=7.4",
         "webmozart/assert": "^1.11",
         "pantagruel74/multicurtest-bank-management-service": "^1.0.0",
-        "pantagruel74/multicurtest-private-operations-service": "^1.2.1"
+        "pantagruel74/multicurtest-private-operations-service": "^1.2.1",
+        "pantagruel74/multicurtest-account-administrations-service": "^2.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
@@ -37,6 +38,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/mnemesong/multicurtest-private-operations-service.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/mnemesong/multicurtest-account-administrations-service.git"
         }
     ]
 }

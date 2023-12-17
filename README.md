@@ -26,7 +26,8 @@ namespace Pantagruel74\MulticurtestCurrencyManager;
 
 final class CurrencyManager implements
     \Pantagruel74\MulticurtestBankManagementService\managers\CurrencyManagerInterface,
-    \Pantagruel74\MulticurtestPrivateOperationsService\managers\CurrencyManagerInterface
+    \Pantagruel74\MulticurtestPrivateOperationsService\managers\CurrencyManagerInterface,
+    \Pantagruel74\MulticurtestAccountAdministrationsService\managers\AvailableCurrencyMangerInterface
 {
 
     /**
@@ -85,5 +86,11 @@ final class CurrencyManager implements
      * @return AmountInCurrencyVal
      */
     public function getZeroForCurrency(string $curId): AmountInCurrencyVal {...}
+    
+    /**
+     * @param array $curIds
+     * @return bool
+     */
+    public function isCurrenciesAvailable(array $curIds): bool {...}
 }
 ```

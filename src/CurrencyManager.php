@@ -8,12 +8,12 @@ use Pantagruel74\MulticurtestCurrencyManager\managers\CurrencyDefManagerInterfac
 use Pantagruel74\MulticurtestCurrencyManager\records\CurrencyConvMultiplierRecInterface;
 use Pantagruel74\MulticurtestCurrencyManager\records\CurrencyDefRecInterface;
 use Pantagruel74\MulticurtestCurrencyManager\value\AmountInCurrencyVal;
-use Pantagruel74\MulticurtestPrivateOperationsService\values\AmountInCurrencyValInterface;
 use Webmozart\Assert\Assert;
 
 final class CurrencyManager implements
     \Pantagruel74\MulticurtestBankManagementService\managers\CurrencyManagerInterface,
-    \Pantagruel74\MulticurtestPrivateOperationsService\managers\CurrencyManagerInterface
+    \Pantagruel74\MulticurtestPrivateOperationsService\managers\CurrencyManagerInterface,
+    \Pantagruel74\MulticurtestAccountAdministrationsService\managers\AvailableCurrencyMangerInterface
 {
     private CurrencyDefManagerInterface $currencyDefManager;
     private CurrencyConvMultiplierMangerInterface $currencyConvMultiplierManger;
@@ -214,5 +214,26 @@ final class CurrencyManager implements
         Assert::true($val >= 0);
         $this->currencyDotPositionCache[$curId] = $val;
         return $val;
+    }
+
+    /**
+     * @param array $curIds
+     * @return bool
+     */
+    public function isCurrenciesAvailable(array $curIds): bool
+    {
+        $availableIds = array_map(
+            fn(CurrencyDefRecInterface $c) => $c->getCurId(),
+            $this->currencyDefManager->getAllAvailable()
+        );
+        foreach ($curIds as $cid) {
+            if(!in_array(
+                $this->convertNameToNewCurrencyToValid($cid),
+                $availableIds
+            )) {
+                return false;
+            }
+        }
+        return true;
     }
 }
