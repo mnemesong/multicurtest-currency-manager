@@ -217,7 +217,7 @@ final class CurrencyManager implements
     }
 
     /**
-     * @param array $curIds
+     * @param string[] $curIds
      * @return bool
      */
     public function isCurrenciesAvailable(array $curIds): bool
@@ -235,5 +235,22 @@ final class CurrencyManager implements
             }
         }
         return true;
+    }
+
+    /**
+     * @param string $curId
+     * @param float $val
+     * @return AmountInCurrencyVal
+     */
+    public function numberToCurrencyAmount(
+        string $curId,
+        float $val
+    ): AmountInCurrencyVal {
+        $curDef = $this->currencyDefManager->getCurrency($curId);
+        return new AmountInCurrencyVal(
+            intval($val * pow(10, $curDef->getDotPosition())),
+            $curDef->getDotPosition(),
+            $curId
+        );
     }
 }

@@ -92,5 +92,15 @@ final class CurrencyManager implements
      * @return bool
      */
     public function isCurrenciesAvailable(array $curIds): bool {...}
+    
+    /**
+     * @param string $curId
+     * @param float $val
+     * @return AmountInCurrencyVal
+     */
+    public function numberToCurrencyAmount(
+        string $curId,
+        float $val
+    ): AmountInCurrencyVal {...}
 }
 ```

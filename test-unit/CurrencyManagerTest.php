@@ -329,4 +329,22 @@ class CurrencyManagerTest extends TestCase
         );
         $this->assertFalse($currencyManager->isCurrenciesAvailable(["RUB", "eur"]));
     }
+
+    public function testCreateCurrencyAmount()
+    {
+        $curDefManager = new CurrencyDefManagerStub([
+            new CurrencyDefRecStub("RUB", 2, true),
+        ]);
+        $curConvMultiManager = new CurrencyConvMultiplierManagerStub([
+        ]);
+        $currencyManager = new CurrencyManager(
+            $curDefManager,
+            $curConvMultiManager
+        );
+        $amount = $currencyManager->numberToCurrencyAmount("RUB", 120);
+        $this->assertEquals("RUB", $amount->getCurId());
+        $this->assertEquals(12000, $amount->getDecades());
+        $this->assertEquals(2, $amount->getDotPosition());
+        $this->assertEquals(120, $amount->toNumber());
+    }
 }

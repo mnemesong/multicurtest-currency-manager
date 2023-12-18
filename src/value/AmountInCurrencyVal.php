@@ -109,4 +109,9 @@ class AmountInCurrencyVal implements
         return $this->dotPosition;
     }
 
+    public function toNumber(): float
+    {
+        return $this->decades / pow(10, $this->dotPosition);
+    }
+
 }
