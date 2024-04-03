@@ -5,6 +5,9 @@ namespace Pantagruel74\MulticurtestCurrencyManager\value;
 use Pantagruel74\MulticurtestPrivateOperationsService\values\AmountInCurrencyValInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * Value-object of amount in currency.
+ */
 class AmountInCurrencyVal implements
     \Pantagruel74\MulticurtestBankManagementService\values\AmountInCurrencyValInterface,
     \Pantagruel74\MulticurtestPrivateOperationsService\values\AmountInCurrencyValInterface

@@ -6,6 +6,10 @@ Divan.ru test task: amount service
 Manager countains logic to produce and operate amounts of currencies.
 Used in some other domain services.
 
+Records aggregation:
+- CurrencyDefRec
+- CurrencyConvMultiplierRec
+
 
 ## Source structure
 - managers
@@ -24,6 +28,10 @@ CurrencyManager
 <?php
 namespace Pantagruel74\MulticurtestCurrencyManager;
 
+/**
+ * Manager countains logic to produce and operate amounts of currencies.
+ * Used in some other domain services.
+ */
 final class CurrencyManager implements
     \Pantagruel74\MulticurtestBankManagementService\managers\CurrencyManagerInterface,
     \Pantagruel74\MulticurtestPrivateOperationsService\managers\CurrencyManagerInterface,
@@ -31,12 +39,14 @@ final class CurrencyManager implements
 {
 
     /**
+     * Request all currencies exists
      * @return array|string[]
      */
     public function getAllCurrenciesExists(): array
     {...}
 
     /**
+     * Converts string to valid currency id.
      * @param string $newCurId
      * @return string
      */
@@ -44,6 +54,7 @@ final class CurrencyManager implements
     {...}
 
     /**
+     * Convert AmountInCurrency to other currency
      * @param AmountInCurrencyVal $amount
      * @param string $targetCurrency
      * @return AmountInCurrencyVal
@@ -54,6 +65,7 @@ final class CurrencyManager implements
     ): AmountInCurrencyVal {...}
 
     /**
+     * Sets new conversion multiplier between currencies.
      * @param string $fromCur
      * @param CurrencyConversionMultiplierVal $conversionMultipliersTo
      * @return void
@@ -64,6 +76,7 @@ final class CurrencyManager implements
     ): void {...}
 
     /**
+     * Command to add new currency.
      * @param string $curId
      * @param CurrencyConversionMultiplierVal[] $conversionMultipliersTo
      * @param int $decimalPosition
@@ -76,24 +89,32 @@ final class CurrencyManager implements
     ): void {...}
 
     /**
+     * Command to switching off currency.
      * @param string $curId
      * @return void
      */
-    public function switchOffCurrency(string $curId): void {...}
+    public function switchOffCurrency(string $curId): void
+    {...}
 
     /**
+     * Produce a zero value of currency
      * @param string $curId
      * @return AmountInCurrencyVal
      */
-    public function getZeroForCurrency(string $curId): AmountInCurrencyVal {...}
-    
+    public function getZeroForCurrency(string $curId): AmountInCurrencyVal
+    {...}
+
     /**
-     * @param array $curIds
+     * Check is currencies available by list of ids.
+     * @param string[] $curIds
      * @return bool
      */
-    public function isCurrenciesAvailable(array $curIds): bool {...}
-    
+    public function isCurrenciesAvailable(array $curIds): bool
+    {...}
+
     /**
+     * Converts float number to value-object of Currency amount with same amount,
+     * as a float number.
      * @param string $curId
      * @param float $val
      * @return AmountInCurrencyVal

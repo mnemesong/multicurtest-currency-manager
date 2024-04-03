@@ -7,6 +7,9 @@ use Pantagruel74\MulticurtestCurrencyManager\records\CurrencyDefRecInterface;
 use Pantagruel74\MulticurtestCurrencyManagerStubs\records\CurrencyDefRecStub;
 use Webmozart\Assert\Assert;
 
+/**
+ * Stub of CurrencyDefManager for tests.
+ */
 class CurrencyDefManagerStub implements CurrencyDefManagerInterface
 {
     private array $curs = [];

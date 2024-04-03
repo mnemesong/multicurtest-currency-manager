@@ -4,6 +4,9 @@ namespace Pantagruel74\MulticurtestCurrencyManagerStubs\records;
 
 use Pantagruel74\MulticurtestCurrencyManager\records\CurrencyConvMultiplierRecInterface;
 
+/**
+ * Stub of CurrencyConvMultiplierRec for tests.
+ */
 class CurrencyConvMultiplierRecStub implements CurrencyConvMultiplierRecInterface
 {
     private string $fromCurId;

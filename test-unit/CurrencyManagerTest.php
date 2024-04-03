@@ -12,8 +12,14 @@ use Pantagruel74\MulticurtestCurrencyManagerStubs\records\CurrencyDefRecStub;
 use PHPUnit\Framework\TestCase;
 use Webmozart\Assert\Assert;
 
+/**
+ * Test-case of CurrencyManager for phpunit.
+ */
 class CurrencyManagerTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testGetAllCurrenciesExists()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -31,6 +37,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertEquals(["RUB", "EUR"], $allCurIds);
     }
 
+    /**
+     * @return void
+     */
     public function testConvertCurrencyNameToValid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -46,6 +55,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertEquals("BOBA", $convertedName);
     }
 
+    /**
+     * @return void
+     */
     public function testConvertCurrencyNameToValidInvalid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -61,6 +73,9 @@ class CurrencyManagerTest extends TestCase
         $convertedName = $currencyManager->convertNameToNewCurrencyToValid("boBa12");
     }
 
+    /***
+     * @return void
+     */
     public function testConvertAmountToValid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -85,6 +100,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertEquals(6, $result->getDecades());
     }
 
+    /**
+     * @return void
+     */
     public function testConvertAmountToInvalidArgument()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -108,6 +126,9 @@ class CurrencyManagerTest extends TestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testSetConvertionMultiplierValid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -136,6 +157,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertEquals(1200, $result->getDecades());
     }
 
+    /**
+     * @return void
+     */
     public function testSetConvertionMultiplierInvalid1()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -159,6 +183,9 @@ class CurrencyManagerTest extends TestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testSetConvertionMultiplierInvalid2()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -182,6 +209,9 @@ class CurrencyManagerTest extends TestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testAddCurrencyValid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -213,6 +243,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertEquals("USD", $conversResult->getCurId());
     }
 
+    /**
+     * @return void
+     */
     public function testAddCurrencyInvalid1()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -236,6 +269,9 @@ class CurrencyManagerTest extends TestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testAddCurrencyInvalid2()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -258,6 +294,9 @@ class CurrencyManagerTest extends TestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testGetZeroForCurrencyValid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -281,6 +320,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertEquals(1, $zeroEur->getDotPosition());
     }
 
+    /**
+     * @return void
+     */
     public function testGetZeroForCurrencyInvalid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -298,6 +340,9 @@ class CurrencyManagerTest extends TestCase
         $zeroBob = $currencyManager->getZeroForCurrency("BOB");
     }
 
+    /**
+     * @return void
+     */
     public function testIsCurrenciesAvailableIdsValid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -314,6 +359,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertTrue($currencyManager->isCurrenciesAvailable(["RUB", "eur"]));
     }
 
+    /**
+     * @return void
+     */
     public function testIsCurrenciesAvailableIdsInvalid()
     {
         $curDefManager = new CurrencyDefManagerStub([
@@ -330,6 +378,9 @@ class CurrencyManagerTest extends TestCase
         $this->assertFalse($currencyManager->isCurrenciesAvailable(["RUB", "eur"]));
     }
 
+    /**
+     * @return void
+     */
     public function testCreateCurrencyAmount()
     {
         $curDefManager = new CurrencyDefManagerStub([

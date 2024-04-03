@@ -5,6 +5,9 @@ namespace Pantagruel74\MulticurtestCurrencyManagerStubs\records;
 use Pantagruel74\MulticurtestCurrencyManager\records\CurrencyDefRecInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * Stub of CurrencyDefRec for tests.
+ */
 class CurrencyDefRecStub implements CurrencyDefRecInterface
 {
     private string $curId;

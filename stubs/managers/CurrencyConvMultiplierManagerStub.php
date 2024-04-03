@@ -7,6 +7,9 @@ use Pantagruel74\MulticurtestCurrencyManager\records\CurrencyConvMultiplierRecIn
 use Pantagruel74\MulticurtestCurrencyManagerStubs\records\CurrencyConvMultiplierRecStub;
 use Webmozart\Assert\Assert;
 
+/**
+ * Stub of CurrencyConvMultiplierManager for tests.
+ */
 class CurrencyConvMultiplierManagerStub implements
     CurrencyConvMultiplierMangerInterface
 {
